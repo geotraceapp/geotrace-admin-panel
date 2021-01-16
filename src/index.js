@@ -3,10 +3,50 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore, combineReducers, compose } from 'redux';
+import { reduxFirestore, firestoreReducer } from 'redux-firestore';
+import { Provider } from 'react-redux';
+import firebase from 'firebase';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/firestore';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDf1_a0sNY9wya9esBP3tvpQIz9uxOlD3s",
+  authDomain: "geotrace-301902.firebaseapp.com",
+  projectId: "geotrace-301902",
+  storageBucket: "geotrace-301902.appspot.com",
+  messagingSenderId: "858490686574",
+  appId: "1:858490686574:web:213b6cae8defb2b7e72a7f"
+};
+//const rfConfig = {}; // optional redux-firestore Config Options
+
+// Initialize firebase instance
+firebase.initializeApp(firebaseConfig);
+// Initialize Cloud Firestore through Firebase
+firebase.firestore();
+
+// Add reduxFirestore store enhancer to store creator
+const createStoreWithFirebase = compose(
+  reduxFirestore(firebase), // firebase instance as first argument, rfConfig as optional second
+)(createStore);
+
+// Add Firebase to reducers
+const rootReducer = combineReducers({
+  firestore: firestoreReducer,
+});
+
+// Create store with reducers and initial state
+const initialState = {};
+const store = createStoreWithFirebase(rootReducer, initialState);
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

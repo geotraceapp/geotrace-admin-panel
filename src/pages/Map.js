@@ -4,35 +4,14 @@ import GoogleMapReact from 'google-map-react';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const handleApiLoaded = (map, maps) => {
-
-    // var heatmapData = [
-    //     new maps.LatLng(49.266083, -123.244471),
-    //     new maps.LatLng(49.261933, -123.241251),
-    //     new maps.LatLng(49.259019, -123.246190),
-    //     new maps.LatLng(49.265199, -123.246225),
-    //     new maps.LatLng(49.262998, -123.248711),
-    //     new maps.LatLng(49.259663, -123.250857),
-    //     new maps.LatLng(49.256395, -123.251402),
-    //     new maps.LatLng(49.266086, -123.244461),
-    //     new maps.LatLng(49.261943, -123.241259),
-    //     new maps.LatLng(49.259119, -123.246290),
-    //     new maps.LatLng(49.261199, -123.246225),
-    //     new maps.LatLng(49.262298, -123.248713),
-    //     new maps.LatLng(49.259963, -123.2508578),
-    //     new maps.LatLng(49.253395, -123.2514022),
-    // ];
-
-
     let heatmapData = [];
     for (let i = 0; i < 250; i++) {
         const max = 0.01;
         const min = -max;
         let x = Math.random() * (max - min) + min;
         let y = Math.random() * (max - min) + min;
-        heatmapData.push({location: new maps.LatLng(49.265 + x, -123.250 + y), weight: 0.1});
-    }    
-
-    console.log(heatmapData);
+        heatmapData.push({ location: new maps.LatLng(49.265 + x, -123.250 + y), weight: 0.1 });
+    }
 
     let heatmap = new maps.visualization.HeatmapLayer({
         data: heatmapData
@@ -52,7 +31,6 @@ class Map extends Component {
         },
         zoom: 13
     };
-
 
     render() {
         return (
