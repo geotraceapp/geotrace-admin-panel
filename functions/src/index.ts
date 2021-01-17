@@ -38,3 +38,19 @@ export const makeEstablishment = functions.https.onRequest(async (req, res): Pro
   res.send('OK')
   return
 })
+
+export const makeExchange = functions.https.onRequest(async (req, res): Promise<void> => {
+  const { userId, userToken, establishmentToken } = req.query;
+  const establishmentRef = (await admin.firestore().collection('establishments').where('token', '==', establishmentToken).get()).docs[0].ref
+  const users = (await admin.firestore().collection('users').where('token', '==', userToken).get()).docs
+  const userRef = users.find(user => {
+    return user.id === userId
+  })?.ref
+  await admin.firestore().collection('exchanges').add({
+    establishmentRef,
+    userRef,
+    date: new Date()
+  });
+  res.send('OK')
+  return
+})
