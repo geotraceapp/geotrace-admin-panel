@@ -4,13 +4,13 @@ import './Map.css';
 
 const handleApiLoaded = (map, maps, establishments) => {
     let heatmapData = [];
-    for (let i = 0; i < 250; i++) {
-        const max = 0.01;
-        const min = -max;
-        let x = Math.random() * (max - min) + min;
-        let y = Math.random() * (max - min) + min;
-        heatmapData.push({ location: new maps.LatLng(49.265 + x, -123.250 + y), weight: 0.1 });
-    }
+    // for (let i = 0; i < 250; i++) {
+    //     const max = 0.01;
+    //     const min = -max;
+    //     let x = Math.random() * (max - min) + min;
+    //     let y = Math.random() * (max - min) + min;
+    //     heatmapData.push({ location: new maps.LatLng(49.265 + x, -123.250 + y), weight: 0.1 });
+    // }
 
     // const heatmapData = establishments.map((establishment) => {
     //     let lat = establishment.lat;
@@ -18,6 +18,19 @@ const handleApiLoaded = (map, maps, establishments) => {
 
     //     return { location: new maps.LatLng(lat, lng), weight: 0.1 }
     // })
+
+    if (establishments.length > 0) {
+        console.log(establishments);
+
+        heatmapData = establishments.map((establishment) => {
+            let lat = establishment.lat;
+            let lng = establishment.lng;
+
+            return { location: new maps.LatLng(lat, lng), weight: 0.1 }
+        })
+    }
+
+    console.log(heatmapData)
 
     let heatmap = new maps.visualization.HeatmapLayer({
         data: heatmapData
@@ -32,7 +45,7 @@ const handleApiLoaded = (map, maps, establishments) => {
 class Map extends Component {
 
 
-    
+
     static defaultProps = {
         center: {
             lat: 49.2656534435675,
