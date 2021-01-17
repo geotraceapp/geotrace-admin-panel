@@ -3,7 +3,10 @@ import { Paper, Card, CardContent, Typography } from '@material-ui/core';
 import './DisplaySummary.css'
 
 class DisplaySummary extends Component {
+  
   render() {
+
+    console.log(this.props.noEstablishment)
     return (
       <div className="container">
         <Paper elevation={3} className="paper">
@@ -13,7 +16,7 @@ class DisplaySummary extends Component {
                 Total Users:
               </Typography>
               <Typography variant="body2" component="p">
-                1992
+                {this.props.noUser.length}
               </Typography>
             </CardContent>
           </Card>
@@ -23,7 +26,7 @@ class DisplaySummary extends Component {
                 Total Establishments:
               </Typography>
               <Typography variant="body2" component="p">
-                152
+              {this.props.noEstablishment.length}
               </Typography>
             </CardContent>
           </Card>
@@ -33,7 +36,7 @@ class DisplaySummary extends Component {
                 Exchanges (past 7 days):
               </Typography>
               <Typography variant="body2" component="p">
-                2393
+              {this.props.noExchange.length}
               </Typography>
             </CardContent>
           </Card>
