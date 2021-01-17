@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, combineReducers, compose } from 'redux';
 import { reduxFirestore, firestoreReducer } from 'redux-firestore';
 import { Provider } from 'react-redux';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';

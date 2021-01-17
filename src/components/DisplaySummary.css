@@ -1,0 +1,15 @@
+.card {
+    margin: 20px;
+}
+
+.paper {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.container {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    z-index: 1;
+}

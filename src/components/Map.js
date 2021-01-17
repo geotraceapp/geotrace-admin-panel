@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import './Map.css';
 
 const handleApiLoaded = (map, maps) => {
     let heatmapData = [];
@@ -34,8 +33,7 @@ class Map extends Component {
 
     render() {
         return (
-            // Important! Always set the container height explicitly
-            <div style={{ height: '50vh', width: '70%' }}>
+            <div className="mapContainer">
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyB12Z1ngare18mezYXsvcfjInBIhbmdu-Y' }}
                     defaultCenter={this.props.center}
@@ -43,11 +41,6 @@ class Map extends Component {
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
-                    <AnyReactComponent
-                        lat={49.2656534435675}
-                        lng={-123.25035467904151}
-                        text="My Marker"
-                    />
                 </GoogleMapReact>
             </div>
         );
