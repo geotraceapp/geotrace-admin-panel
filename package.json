@@ -17,18 +17,15 @@
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
-    "react-google-maps": "^9.4.5",
     "react-redux": "^7.2.2",
     "react-redux-firebase": "^3.9.0",
     "react-scripts": "4.0.1",
     "redux": "^4.0.5",
-    "redux-firestore": "^0.14.0",
-    "web-vitals": "^0.2.4"
+    "redux-firestore": "^0.14.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
