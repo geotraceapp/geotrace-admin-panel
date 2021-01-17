@@ -4,7 +4,6 @@ export interface Person {
 }
 
 export interface Establishment {
-  id: string
   token: string
   name: string
   lat: number
