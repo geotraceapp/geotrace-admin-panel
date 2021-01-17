@@ -31,7 +31,7 @@ class DisplaySummary extends Component {
           <Card className="card">
             <CardContent>
               <Typography variant="h5" component="h2">
-                Exchanges (past 7 days):
+                Exchanges:
               </Typography>
               <Typography variant="body2" component="p">
                 {this.props.noExchanges}
