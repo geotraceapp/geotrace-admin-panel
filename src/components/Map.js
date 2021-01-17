@@ -12,13 +12,6 @@ const handleApiLoaded = (map, maps, establishments) => {
     //     heatmapData.push({ location: new maps.LatLng(49.265 + x, -123.250 + y), weight: 0.1 });
     // }
 
-    // const heatmapData = establishments.map((establishment) => {
-    //     let lat = establishment.lat;
-    //     let lng = establishment.lng;
-
-    //     return { location: new maps.LatLng(lat, lng), weight: 0.1 }
-    // })
-
     if (establishments.length > 0) {
         console.log(establishments);
 
@@ -26,7 +19,9 @@ const handleApiLoaded = (map, maps, establishments) => {
             let lat = establishment.lat;
             let lng = establishment.lng;
 
-            return { location: new maps.LatLng(lat, lng), weight: 0.1 }
+            const weight = establishment.count / 10 ;
+
+            return { location: new maps.LatLng(lat, lng), weight: weight }
         })
     }
 
