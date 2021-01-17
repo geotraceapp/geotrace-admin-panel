@@ -53,6 +53,32 @@ export const makeExchange = functions.https.onRequest(async (req, res): Promise<
   return
 })
 
+export const reportNEGATIVE = functions.https.onRequest(async (req, res): Promise<void> => {
+  const { userId } = req.query;
+
+  (await admin.firestore().doc(`/users/${userId}`).update({
+    covid: false
+  }))
+
+  res.send('OK')
+
+  return
+
+})
+
+export const reportPOSITIVE = functions.https.onRequest(async (req, res): Promise<void> => {
+  const { userId } = req.query;
+
+  (await admin.firestore().doc(`/users/${userId}`).update({
+    covid: true
+  }))
+
+  res.send('OK')
+
+  return
+
+})
+
 export const getRiskLevel = functions.https.onRequest(async (req, res): Promise<void> => {
   const { userId } = req.query;
 
