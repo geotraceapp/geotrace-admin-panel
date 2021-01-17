@@ -10,7 +10,7 @@ admin.initializeApp()
 
 export const makeUser = functions.https.onRequest(async (_req, res): Promise<void> => {
   const token = random()
-  const writeResult = await admin.firestore().collection('users').add({ token });
+  const writeResult = await admin.firestore().collection('users').add({ token, covid: false });
   res.json({ id: writeResult.id, token })
   return
 })
@@ -33,7 +33,8 @@ export const makeEstablishment = functions.https.onRequest(async (req, res): Pro
     token,
     name,
     lat,
-    lng 
+    lng,
+    count: 0
   });
   res.send('OK')
   return
@@ -51,6 +52,7 @@ export const makeExchange = functions.https.onRequest(async (req, res): Promise<
     userRef,
     date: new Date()
   });
+  await establishmentRef.update({ count: admin.firestore.FieldValue.increment(1) })
   res.send('OK')
   return
 })
