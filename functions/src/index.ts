@@ -117,6 +117,6 @@ export const getRiskLevel = functions.https.onRequest(async (req, res): Promise<
 
   if (marked) return
 
-  res.json({ degree: -1 })
+  res.json({ degree: 4 })
   return
 })
