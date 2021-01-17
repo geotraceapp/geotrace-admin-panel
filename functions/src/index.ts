@@ -42,13 +42,13 @@ export const makeEstablishment = functions.https.onRequest(async (req, res): Pro
 
 export const makeExchange = functions.https.onRequest(async (req, res): Promise<void> => {
   const { userId, establishmentToken } = req.query;
-  const establishmentRef = (await admin.firestore().collection('establishments').where('token', '==', establishmentToken).get()).docs[0].ref
+  const establishmentRef1 = (await admin.firestore().collection('establishments').where('token', '==', establishmentToken).get()).docs[0].ref
   await admin.firestore().collection('exchanges').add({
-    establishmentRef: establishmentRef.id,
+    establishmentRef: establishmentRef1.id,
     userRef: userId,
     date: new Date()
   });
-  await establishmentRef.update({ count: admin.firestore.FieldValue.increment(1) })
+  await establishmentRef1.update({ count: admin.firestore.FieldValue.increment(1) })
   res.send('OK')
   return
 })
@@ -56,9 +56,9 @@ export const makeExchange = functions.https.onRequest(async (req, res): Promise<
 export const getRiskLevel = functions.https.onRequest(async (req, res): Promise<void> => {
   const { userId } = req.query;
 
-  const user: any = (await admin.firestore().doc(`/users/${userId}`).get()).data()
+  const currentUser: any = (await admin.firestore().doc(`/users/${userId}`).get()).data()
 
-  if (user.covid) {
+  if (currentUser.covid) {
     res.json({ degree: 0 })
     return
   }
@@ -98,14 +98,14 @@ export const getRiskLevel = functions.https.onRequest(async (req, res): Promise<
       }
       if (degree < 3) {
         (await admin.firestore().collection('exchanges').where('userRef', '==', x.userRef).get()).docs.forEach(location => {
-          const establishmentRef = location.data().establishmentRef
-          const cond = checkedEstablishmentIds.findIndex(x => {
-            return x === String(establishmentRef)
+          const establishmentRef2 = location.data().establishmentRef
+          const cond = checkedEstablishmentIds.findIndex(y => {
+            return y === String(establishmentRef2)
           })
           if (cond === -1) {
             locationsToCheck.push(
               {
-                establishmentRef,
+                establishmentRef: establishmentRef2,
                 degree: degree + 1
               }
             )
